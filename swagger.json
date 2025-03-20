@@ -5,10 +5,11 @@
     "description": "API for managing books with CRUD operations using Node.js, Express, and MongoDB.",
     "version": "1.0.0"
   },
-  "host": "cse341-project1-77c4.onrender.com",
+  "host": "cse341-project2-abrs.onrender.com",
   "basePath": "/",
   "schemes": [
-    "https"
+    "https",
+    "http"
   ],
   "paths": {
     "/": {
