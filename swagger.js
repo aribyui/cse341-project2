@@ -5,8 +5,8 @@ const doc = {
     title: 'cse341-project2',
     description: 'API for managing books with CRUD operations using Node.js, Express, and MongoDB.'
   },
-  host: 'localhost:8080',
-  schemes: ['https', 'http']
+  host: 'cse341-project2-abrs.onrender.com',
+  schemes: ['https']
 };
 
 const outputFile = './swagger.json';
