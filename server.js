@@ -12,6 +12,7 @@ mongodb.connectDb();
 app.use(cors());
 app.use(express.json());
 app.use('/', routes);
+// The default error handler - https://tinyurl.com/2zh7fm8k
 app.use((err, req, res, next) => {
   console.log(err.stack);
   res.status(500).send({ message: 'Something broke!' });

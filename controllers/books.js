@@ -6,7 +6,7 @@ async function getBooks(req, res) {
     const booksCollection = await client.db().collection('books').find().toArray();
     res.status(200).json(booksCollection);
   } catch (err) {
-    res.status(500).send(`Error fetching books: ${err.message}`);
+    res.status(500).send('Error fetching books.');
   }
 };
 
@@ -37,7 +37,7 @@ async function updateBook(req, res) {
     await booksCollection.updateOne({ _id: bookId }, { $set: doc });
     res.status(200).send('Book successfully updated.');
   } catch (err) {
-    res.status(400).send('Error updating the book');
+    res.status(400).send('Error updating the book.');
   }
 };
 

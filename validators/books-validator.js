@@ -8,7 +8,7 @@
 
 const { body, validationResult } = require('express-validator');
 
-const genres = [
+const bookGenres = [
   'adventure',
   'classics',
   'fiction',
@@ -37,7 +37,7 @@ const genres = [
   'philosophy',
   'art',
   'humor'
-]
+];
 
 const postPutSharedRules = [
   body('title')
@@ -58,20 +58,12 @@ const postPutSharedRules = [
     .escape()
     .notEmpty()
     .withMessage('the genre field is required')
-    .isIn(genres)
-    .withMessage(`try one of the following genres: ${genres.join()}`)
+    .isIn(bookGenres)
+    .withMessage(`try one of the following genres: ${bookGenres.join()}`)
     .isLowercase()
     .withMessage('please, enter the genre in lower case')
     .bail()
 ]
-
-const postValidationRules = [
-  ...postPutSharedRules
-];
-
-const putValidationRules = [
-  ...postPutSharedRules
-];
 
 const validate = (req, res, next) => {
   const errors = validationResult(req);
@@ -82,7 +74,6 @@ const validate = (req, res, next) => {
 };
 
 module.exports = {
-  postValidationRules,
-  putValidationRules,
+  postPutSharedRules,
   validate
 };

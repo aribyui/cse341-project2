@@ -11,4 +11,7 @@ router.use('/', require('./swagger'))
 // Import books routes
 router.use('/', require('./books'));
 
+// Import movies routes
+router.use('/', require('./movies'));
+
 module.exports = router;
