@@ -1,14 +1,15 @@
-const express = require('express')
-const router = express.Router()
+const express = require('express');
+const router = express.Router();
 const moviesControllers = require('../controllers/movies');
-const { postPutSharedRules, validate } = require('../validators/movies-validator')
+const { postPutSharedRules, validate } = require('../validators/movies-validator');
+const { isAuthenticated } = require('../validators/authenticate');
 
-router.get('/movies', moviesControllers.getMovies);
+router.get('/', moviesControllers.getMovies);
 
-router.post('/movies', postPutSharedRules, validate, moviesControllers.addMovie);
+router.post('/', isAuthenticated, postPutSharedRules, validate, moviesControllers.addMovie);
 
-router.put('/movies/:id', postPutSharedRules, validate, moviesControllers.updateMovie);
+router.put('/:id', isAuthenticated, postPutSharedRules, validate, moviesControllers.updateMovie);
 
-router.delete('/movies/:id', moviesControllers.deleteMovie);
+router.delete('/:id', isAuthenticated, moviesControllers.deleteMovie);
 
 module.exports = router;
