@@ -15,8 +15,10 @@ mongodb.connectDb();
 
 // Middlewares
 app.use(cors({
-  origin: '*', // Permitir cualquier origen
-  methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'], // Métodos permitidos
+  origin: process.env.CORS_ORIGIN || '*',  
+  methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'],
+  allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
+  credentials: true, 
 }));
 app.use(express.json());
 app.use(session({
