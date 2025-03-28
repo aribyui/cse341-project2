@@ -14,6 +14,10 @@ const GitHubStrategy = require('passport-github2').Strategy;
 mongodb.connectDb();
 
 // Middlewares
+app.use(cors({
+  origin: '*', // Permitir cualquier origen
+  methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'], // Métodos permitidos
+}));
 app.use(express.json());
 app.use(session({
   secret: 'secret',
@@ -34,8 +38,6 @@ app.use((req, res, next) => {
   );
   next();
 }); 
-app.use(cors({ methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'] }));
-app.use(cors({ origin: '*' }));
 
 app.use('/', routes);
 // The default error handler - https://tinyurl.com/2zh7fm8k
