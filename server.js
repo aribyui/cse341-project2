@@ -14,12 +14,13 @@ const GitHubStrategy = require('passport-github2').Strategy;
 mongodb.connectDb();
 
 // Middlewares
-app.use(cors({
-  origin: process.env.CORS_ORIGIN || '*',  
-  methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'],
-  allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
-  credentials: true, 
-}));
+// app.use(cors({
+//   origin: process.env.CORS_ORIGIN || '*',  
+//   methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'],
+//   allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
+//   credentials: true, 
+// }));
+app.use(cors());
 app.use(express.json());
 app.use(session({
   secret: 'secret',
