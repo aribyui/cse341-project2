@@ -1,9 +1,11 @@
 const express = require('express');
 const app = express();
+const dotenv = require('dotenv');
+dotenv.config();
 const mongodb = require('./data/database');
 const routes = require('./routes/index');
 const cors = require('cors');
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 4000;
 const passport = require('passport');
 const session = require('express-session');
 const GitHubStrategy = require('passport-github2').Strategy;
