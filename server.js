@@ -14,7 +14,6 @@ const GitHubStrategy = require('passport-github2').Strategy;
 mongodb.connectDb();
 
 // Middlewares
-app.use(cors());
 app.use(express.json());
 app.use(session({
   secret: 'secret',
@@ -23,6 +22,21 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept, Z-Key, Authorization'
+  );
+  res.setHeader(
+    'Access-Control-Allow-Methods',
+    'POST, GET, PUT, PATCH, OPTIONS, DELETE'
+  );
+  next();
+}); 
+app.use(cors({ methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'] }));
+app.use(cors({ origin: '*' }));
+
 app.use('/', routes);
 // The default error handler - https://tinyurl.com/2zh7fm8k
 app.use((err, req, res, next) => {
@@ -53,7 +67,8 @@ passport.deserializeUser((user, done) => {
 app.get('/', (req, res) => { res.send(req.session.user !== undefined ? `Logged in as ${req.session.user.displayName}` : 'Logged out') });
 
 app.get('/github/callback', passport.authenticate('github', {
-  failureRedirect: '/api-docs', session: false}),
+  failureRedirect: '/api-docs', session: false
+}),
   (req, res) => {
     // console.log('User object:', req.user);
     req.session.user = req.user;
